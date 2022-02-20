@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRaceBonusTable extends Migration
+class CreateSubRaceBonusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateRaceBonusTable extends Migration
      */
     public function up()
     {
-        Schema::create('race_bonus', function (Blueprint $table) {
+        Schema::create('sub_race_bonus', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('race_id');
+            $table->unsignedInteger('sub_race_id');
             $table->unsignedInteger('ability_id');
             $table->integer('bonus');
 
-            $table->foreign('race_id')->references('id')->on('races')->onDelete('cascade');
+            $table->foreign('sub_race_id')->references('id')->on('sub_races')->onDelete('cascade');
             $table->foreign('ability_id')->references('id')->on('abilities')->onDelete('cascade');
         });
     }
@@ -32,11 +32,11 @@ class CreateRaceBonusTable extends Migration
     public function down()
     {
         Schema::table('race_bonus', function (Blueprint $table) {
-            $table->dropForeign('race_id');
-            $table->dropColumn('race_id');
+            $table->dropForeign('sub_race_id');
+            $table->dropColumn('sub_race_id');
             $table->dropForeign('ability_id');
             $table->dropColumn('ability_id');
         });
-        Schema::dropIfExists('race_bonus');
+        Schema::dropIfExists('sub_race_bonus');
     }
 }
