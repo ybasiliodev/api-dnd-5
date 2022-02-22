@@ -17,7 +17,6 @@ class CreateSubRacesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('description');
-            $table->string('image');
             $table->unsignedInteger('race_id');
 
             $table->foreign('race_id')->references('id')->on('races')->onDelete('cascade');
