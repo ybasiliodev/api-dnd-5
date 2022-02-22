@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Abilities extends Model
@@ -11,21 +12,26 @@ class Abilities extends Model
 
     public function expertise(): HasMany
     {
-        return $this->hasMany(Expertise::class);
+        return $this->hasMany(Skills::class);
     }
 
-    public function abilityXClass(): HasMany
+    public function races(): BelongsToMany
     {
-        return $this->hasMany(AbilitiesXClasses::class);
+        return $this->BelongsToMany(Races::class, "race_bonus","ability_id", "race_id");
     }
 
-    public function abilityXClassResist(): HasMany
+    public function subRaces(): BelongsToMany
     {
-        return $this->hasMany(AbilitiesXClassesResist::class);
+        return $this->BelongsToMany(SubRaces::class, "sub_race_bonus","ability_id", "sub_race_id");
     }
 
-    public function raceBonus(): HasMany
+    public function classes(): BelongsToMany
     {
-        return $this->hasMany(RaceBonus::class);
+        return $this->BelongsToMany(SubRaces::class, "abilities_classes","ability_id", "class_id");
+    }
+
+    public function classesResistances(): BelongsToMany
+    {
+        return $this->BelongsToMany(SubRaces::class, "abilities_classes_resistances","ability_id", "class_id");
     }
 }

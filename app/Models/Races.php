@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Races extends Model
@@ -14,8 +15,8 @@ class Races extends Model
         return $this->hasMany(SubRaces::class);
     }
 
-    public function raceBonus(): HasMany
+    public function abilities(): BelongsToMany
     {
-        return $this->hasMany(RaceBonus::class);
+        return $this->BelongsToMany(Abilities::class, "race_bonus");
     }
 }
