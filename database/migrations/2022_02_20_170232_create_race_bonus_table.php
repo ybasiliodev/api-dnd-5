@@ -19,8 +19,8 @@ class CreateRaceBonusTable extends Migration
             $table->unsignedInteger('ability_id');
             $table->integer('bonus');
 
-            $table->foreign('race_id')->references('id')->on('races')->onDelete('cascade');
-            $table->foreign('ability_id')->references('id')->on('abilities')->onDelete('cascade');
+            $table->foreign('race_id')->references('id')->on('race')->onDelete('cascade');
+            $table->foreign('ability_id')->references('id')->on('ability')->onDelete('cascade');
         });
     }
 

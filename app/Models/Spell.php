@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Spells extends Model
+class Spell extends Model
 {
+    protected $table = 'spell';
     public $timestamps = false;
 
     public function spellSchool(): BelongsTo
     {
-        return $this->belongsTo(SpellSchools::class);
+        return $this->belongsTo(SpellSchool::class);
     }
 
     public function class(): BelongsTo

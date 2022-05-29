@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRacesTable extends Migration
+class CreateSubRaceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateRacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('races', function (Blueprint $table) {
+        Schema::create('sub_race', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->longText('description');
-            $table->string('image');
+            $table->unsignedInteger('race_id');
+
+            $table->foreign('race_id')->references('id')->on('race')->onDelete('cascade');
         });
     }
 
@@ -28,6 +30,10 @@ class CreateRacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('races');
+        Schema::table('sub_race', function (Blueprint $table) {
+            $table->dropForeign('race_id');
+            $table->dropColumn('race_id');
+        });
+        Schema::dropIfExists('sub_race');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbilitiesTable extends Migration
+class CreateSpellSchoolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAbilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('abilities', function (Blueprint $table) {
+        Schema::create('spell_school', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->longText('description');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateAbilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abilities');
+        Schema::dropIfExists('spell_school');
     }
 }

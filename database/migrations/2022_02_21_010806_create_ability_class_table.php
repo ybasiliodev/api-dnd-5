@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbilitiesClassesTable extends Migration
+class CreateAbilityClassTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAbilitiesClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('abilities_classes', function (Blueprint $table) {
+        Schema::create('ability_class', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('class_id');
             $table->unsignedInteger('ability_id');
 
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->foreign('ability_id')->references('id')->on('abilities')->onDelete('cascade');
+            $table->foreign('ability_id')->references('id')->on('ability')->onDelete('cascade');
         });
     }
 
@@ -30,12 +30,12 @@ class CreateAbilitiesClassesTable extends Migration
      */
     public function down()
     {
-        Schema::table('abilities_classes', function (Blueprint $table) {
+        Schema::table('ability_class', function (Blueprint $table) {
             $table->dropForeign('ability_id');
             $table->dropColumn('ability_id');
             $table->dropForeign('class_id');
             $table->dropColumn('class_id');
         });
-        Schema::dropIfExists('abilities_classes');
+        Schema::dropIfExists('ability_class');
     }
 }
