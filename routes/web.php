@@ -13,6 +13,26 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'api', 'middleware' => 'customAuth'], function () use ($router) {
+
+    $router->group(['prefix' => 'race'], function () use ($router) {
+        $router->get('', 'RaceController@index');
+        $router->get('{id}', 'RaceController@show');
+    });
+
+    $router->group(['prefix' => 'sub_race'], function () use ($router) {
+        $router->get('', 'SubRaceController@index');
+        $router->get('{id}', 'SubRaceController@show');
+    });
+
+    $router->group(['prefix' => 'ability'], function () use ($router) {
+        $router->get('', 'AbilityController@index');
+        $router->get('{id}', 'AbilityController@show');
+    });
+
+    $router->group(['prefix' => 'classes'], function () use ($router) {
+        $router->get('', 'ClassesController@index');
+        $router->get('{id}', 'ClassesController@show');
+    });
 });
+$router->post('api/login', 'TokenController@generateToken');
